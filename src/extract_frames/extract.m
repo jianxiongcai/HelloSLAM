@@ -5,11 +5,7 @@ saving_folder = fullfile('..','..','data','1','rgb');
 % saving_folder = fullfile('..','..','data','test','rgb');
 
 % create saving path
-try
-    mkdir(saving_folder);
-catch 
-    disp('[OK] Create saving folder');
-end
+create_folder( saving_folder );
 
 % extract frames and save to the folder
 v = VideoReader(vedio_path);
