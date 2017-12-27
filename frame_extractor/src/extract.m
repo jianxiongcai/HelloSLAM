@@ -10,7 +10,7 @@ mkdir(saving_folder);
 % extract frames and save to the folder
 v = VideoReader(vedio_path);
 frame_id = 1;
-while (hasFrame(v))
+while hasFrame(v)
     f = readFrame(v);
     % save each indivual frames to file system
     file_path = fullfile(pwd,saving_folder,strcat(num2str(frame_id),'.png'));
