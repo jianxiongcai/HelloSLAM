@@ -1,20 +1,23 @@
-% play
-% test two lines
-line1 = [0; 0; 1; 1];
-% line2 = [1; 1; 2; 2];
-line2 = [1.5; 1; 3; 3];
-
-plot_line(line1,'r',1);
-plot_line(line2,'r',1);
-
-[ res_line ] = line_merging( line1, line2);
-
-plot_line(res_line,'b',2);
-
-function plot_line(line_in, color, width)
-    line([line_in(1) line_in(3)], [line_in(2) line_in(4)],'Color',color,'LineWidth',width);
+% read in txt
+txt_path = '../../data/171229T132838video/1514525318573.9.txt';
+[lines] = read_in_lines(txt_path);
+figure;
+for i = 1:1:size(lines,2)
+    plot_line(lines(:,i), 'b', 1);
     hold on;
 end
+
+
+figure;
+[ lines ] = merge_lines_img(2, txt_path );
+
+for i = 1:1:size(lines,2)
+    plot_line(lines(:,i), 'r', 1);
+    hold on;
+end
+
+
+return ;
 
 
 function [lines] = read_in_lines(txt_path)
