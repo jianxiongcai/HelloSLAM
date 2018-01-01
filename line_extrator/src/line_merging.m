@@ -7,8 +7,9 @@ function [ res_line ] = line_merging( line1, line2)
 % Input:
 %   line1, line2:           two lines to be merge, in the form of
 %                           [x1; y1; x2; y2]
-width1 = get_line_width(line1);
-width2 = get_line_width(line2);
+% it's length actually...
+width1 = get_line_length(line1);
+width2 = get_line_length(line2);
 % starting point
 a = [line1(1); line1(2)];
 b = [line1(3); line1(4)];

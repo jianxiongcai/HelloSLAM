@@ -8,8 +8,9 @@ for i = 1:1:size(lines,2)
 end
 
 
-[ lines ] = merge_lines_img(0.05*1080,pi/180, txt_path );
+[ lines ] = merge_lines_img(0.05*1080,pi/180,0.05*1080, txt_path );
 
+% plot out lines
 figure;
 for i = 1:1:size(lines,2)
     plot_line(lines(:,i), 'r', 1);

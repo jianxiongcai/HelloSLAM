@@ -1,13 +1,6 @@
 % merge all lines in the image
 
-function [ lines_res ] = merge_lines_img(dist_thres, angular_thres, eli_thres, txt_path )
-% Input:
-%       dist_thres:             the distance threshold for determine
-%                               whether to merge two lines
-%       angular_thres:          the angular threshold for determine
-%                               whether to merge two lines
-%       eli_thres:              lines > the threshold will be kept
-%       txt_path:               the path to read lines
+function [ lines_res ] = merge_lines_img(dist_threshold, angular_threshold, txt_path )
     % read in all lines from the image
     lines = read_in_lines(txt_path);
     i = 1;
@@ -21,7 +14,7 @@ function [ lines_res ] = merge_lines_img(dist_thres, angular_thres, eli_thres, t
                 j = j + 1;
                 continue;
             end
-            flag = is_similiar(dist_thres,angular_thres, line_i, lines(:,j));
+            flag = is_similiar(dist_threshold,angular_threshold, line_i, lines(:,j));
             if (flag == 1)
                 % merge lines
                 line_i = line_merging( line_i, lines(:,j));
@@ -45,9 +38,7 @@ function [ lines_res ] = merge_lines_img(dist_thres, angular_thres, eli_thres, t
     % elimite lines with distance smaller then threshold
     lines_res = [];
     for i = 1:1:size(lines,2)
-        if (get_line_length(lines(:,i)) > eli_thres)
-            lines_res = [lines_res lines(:,i)];
-        end
+        if ()
     end
 end
 
@@ -77,6 +68,8 @@ end
 function [dist] = get_distance(point1, point2)
     dist = norm([point1(1)-point2(1), point1(2) - point2(2)]);
 end
+
+    function [dist] = get_line_dist(line)
 
 function [lines] = read_in_lines(txt_path)
 % Input:
