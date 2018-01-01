@@ -1,6 +1,6 @@
 % read in video frames
 % video_paths = {'activity_room_1_video','activity_room_2_video','dorm_room_1_video','dorm_room_2_data','elevator_1_video','elevator_2_video'};
-video_paths = {'171229T132838video','171229T133050video'};
+video_paths = {'180101T162248video','180101T162756video'};
 
 
 for k = 1:1:size(video_paths,2)
@@ -10,8 +10,8 @@ for k = 1:1:size(video_paths,2)
     
     % extract frames and save to the folder
     v = VideoReader(video_path);
-    if(k == 1)frame_id = 1514525318573.9;
-    else frame_id = 1514525450759.83;
+    if(k == 1)frame_id = 1514794968524.66;
+    else frame_id = 1514795276996.37;
     end
     cnt = 0;
     while hasFrame(v)
