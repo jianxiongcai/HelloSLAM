@@ -1,6 +1,6 @@
 % merge all lines in the image
 
-function [ lines ] = merge_lines_img(threshold, txt_path )
+function [ lines ] = merge_lines_img(dist_threshold, angular_threshold, txt_path )
     % read in all lines from the image
     lines = read_in_lines(txt_path);
     i = 1;
@@ -8,19 +8,25 @@ function [ lines ] = merge_lines_img(threshold, txt_path )
         line_i = lines(:,i);
         % merge lines with line i
         j = 1;
+        offset = 0;
         while ( j <= size(lines,2) )
             if (i == j)
                 j = j + 1;
+                continue;
             end
-            flag = is_similiar(threshold, line_i, lines(:,j));
+            flag = is_similiar(dist_threshold,angular_threshold, line_i, lines(:,j));
             if (flag == 1)
-                % merge line
-                disp(line_i);
-                disp( lines(:,j));
+                % merge lines
                 line_i = line_merging( line_i, lines(:,j));
-                disp(line_i);
-                % discard the jth element
+                
+                %discard the jth element
                 lines = [lines(:,1:j-1) lines(:,j+1:end)];
+                
+                % update ith element
+                if (i>j)
+                    offset = offset + 1;
+                end
+                lines(:,i-offset) = line_i;
             else
                 j = j + 1;
             end
@@ -29,16 +35,31 @@ function [ lines ] = merge_lines_img(threshold, txt_path )
     end
 end
 
-function [flag] = is_similiar(threshold, line1, line2)
-    %TODO this part is wrong !!!
-    if ((abs(line1(1) - line2(1)) < threshold) ||...
-            (abs(line1(1) - line2(2)) < threshold) || ...
-            (abs(line1(2) - line2(1)) < threshold) || ...
-            (abs(line1(2) - line2(2)) < threshold))
-        flag = 1;
+function [flag] = is_similiar(threshold,angular_threshold, line1, line2)
+    % determine whether to merge this two lines or not
+    if ((get_distance(line1(1:2,1), line2(1:2,1)) < threshold) ||...
+            (get_distance(line1(3:4,1), line2(1:2,1)) < threshold) || ...
+            (get_distance(line1(1:2,1), line2(3:4,1)) < threshold) || ...
+            (get_distance(line1(3:4,1), line2(3:4,1)) < threshold))
+        ori1 = get_line_oriention(line1);
+        ori2 = get_line_oriention(line2);
+        theta = abs(ori1-ori2);
+        if (theta > pi/2)
+            theta = pi - theta;
+        end
+        if ( theta < angular_threshold)
+            flag = 1;
+        else
+            flag = 0;
+        end
+        return;
     else
         flag = 0;
     end
+end
+
+function [dist] = get_distance(point1, point2)
+    dist = norm([point1(1)-point2(1), point1(2) - point2(2)]);
 end
 
 function [lines] = read_in_lines(txt_path)

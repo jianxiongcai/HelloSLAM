@@ -1,5 +1,5 @@
 % read in txt
-txt_path = '../../data/171229T132838video/1514525318573.9.txt';
+txt_path = '../../data/171229T132838video/1514525318673.9.txt';
 [lines] = read_in_lines(txt_path);
 figure;
 for i = 1:1:size(lines,2)
@@ -8,9 +8,9 @@ for i = 1:1:size(lines,2)
 end
 
 
-figure;
-[ lines ] = merge_lines_img(2, txt_path );
+[ lines ] = merge_lines_img(0.05*1080,pi/180, txt_path );
 
+figure;
 for i = 1:1:size(lines,2)
     plot_line(lines(:,i), 'r', 1);
     hold on;
