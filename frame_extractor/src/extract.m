@@ -5,7 +5,8 @@ video_paths = dir(fullfile(data_dir,'*.mp4'));
 video_path = fullfile(data_dir,video_paths(1).name);
 [~,video_name,~] = fileparts(video_path);
 
-saving_folder = fullfile(data_dir,video_name);
+% saving_folder = fullfile(data_dir,video_name);
+saving_folder = fullfile(data_dir,'rgb');
 mkdir(saving_folder);
 
 % extract frames and save to the folder

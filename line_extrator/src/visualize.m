@@ -1,9 +1,13 @@
 % visualize any data
-path1 = fullfile('171229T133050video','1514525483859.749.pgm');
-path2 = fullfile('171229T133050video-merge','1514525483859.749.mat');
-path1 = fullfile('..','..','data',path1);
-path2 = fullfile('..','..','data',path2);
+for idx = 1:1:300
+    path1 = strcat(num2str(idx),'.pgm');
+    path2 = strcat(num2str(idx),'.mat');
+    path1 = fullfile('..','..','data','rgb',path1);
+    path2 = fullfile('..','..','data','lines',path2);
 
-imshow(imread(path1));
-load(path2);
-plot_lines(lines);
+    load(path2);
+    imshow(imread(path1));
+    plot_lines(lines);
+    
+    pause(0.5);
+end
