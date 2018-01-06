@@ -1,5 +1,8 @@
 % the main function for merging lines
 % Remember to verify the threshold
+
+addpath(fullfile('..','..','common'));
+
 input_name = 'lines-raw';
 input_path = fullfile('..','..','data',input_name);
 
