@@ -62,15 +62,13 @@ classdef LinesTracker < handle
             % for each line in this image, match it with the last one, if
             % it is one line, append it to lines.
             lines = apply_homography(lines, H);
+            
             lines_idx = [];
             for i = 1:1:size(lines,2)
                 % j is the tracking line id
                 matched_flag = 0;
                 for j = 1:1:size(obj.lines_idx_pre,2)
                     [line_pre] = obj.lines_tracking(obj.lines_idx_pre(j)).get_line(obj.img_idx_pre);
-                    if (obj.lines_idx_pre(j) == 1)
-                        debug = 1;
-                    end
                     if (is_similar(lines(:,i), line_pre, 0.05*1080) == 1)
                         % update the line tracking process
                         obj.lines_tracking(obj.lines_idx_pre(j)).add_line(img_idx,lines(:,i));
@@ -87,6 +85,17 @@ classdef LinesTracker < handle
                 end
             end
             
+%             % eliminate all lines has only one 2D line and is no longer in
+%             % active sequence
+%             lines_tracking_new = [];
+%             for i = 1:1:size(obj.lines_tracking,2)
+%                 if ((obj.lines_tracking(i).get_num_lines() ~= 1) ||...
+%                     (is_element(lines_idx,i) ~= 0)) 
+%                         lines_tracking_new = [lines_tracking_new obj.lines_tracking(i)];
+%                 end
+%             end
+%             % update lines tracking
+%             obj.lines_tracking = lines_tracking_new;
             
             % store points and features to previous one
             obj.img_pre = img;
@@ -94,10 +103,24 @@ classdef LinesTracker < handle
             obj.features_pre = features;
             obj.points_pre = points_raw;
             obj.lines_idx_pre = lines_idx;
+            
+            
         end
     end
 end
 
+function [flag] = is_element(A,x)
+    num = size(A,1) * size(A,2);
+    for i = 1:1:num
+        if (x == A(i))
+            flag = 1;
+            return;
+        end
+    end
+    % not-found
+    flag = 0;
+end
+    
 % determine if two lines are the same line
 function [flag] = is_similar(line1, line2, threshold)
     if ((size(line1,1) < 4) || (size(line1,2) ~= 1) ||...
