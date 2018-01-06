@@ -23,14 +23,16 @@ classdef IOData < handle
             end
         end
         
-        function [img,flag] = read_png(obj,idx)
-            img_name = fullfile(obj.img_path,strcat(num2str(idx),'.png'));
-            if (exist(img_name) == 0)
+        function [lines,flag] = read_lines(obj,idx)
+            mat_name = fullfile(obj.lines_path,strcat(num2str(idx),'.mat'));
+            if (exist(mat_name) == 0)
                 flag = 0;
-                img = [];
+                lines = [];
             else
                 flag = 1;
-                img = im2double(imread(img_name));
+                load(mat_name);
+                % return lines
+                return;
             end
         end
     end
