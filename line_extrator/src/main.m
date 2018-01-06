@@ -16,13 +16,13 @@ parfor j = 1:size(txt_paths,2)
     disp(strcat('Processing ',txt_paths{j}));
     % read in all lines and merge lines
     lines = merge_lines_img(0.05*1080,pi/180,0.05*1080, txt_paths{j} );
+    
     % save lines to txt files
     saving_name = fullfile(saving_dir,txt_names{j});
     [temp_path, temp_name] = fileparts(saving_name);
     mat_name = fullfile(temp_path, strcat(temp_name,'.mat'));
     save_lines(mat_name, lines);
 end
-
 
 
 function [video_path, video_names] = get_video_names(dir_path)
