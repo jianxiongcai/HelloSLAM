@@ -17,9 +17,17 @@ classdef LineTracking < handle
             obj.lines_2d = [obj.lines_2d; struct('img_idx',img_idx,'line',line_in)];
         end
         
-        % TODO
         % get the 2D line representation on image plane in img_idx
-        function get_line(img_idx)
+        function [line] = get_line(obj,img_idx)
+            for i = 1:1:size(obj.lines_2d,1)
+                if (obj.lines_2d(i).img_idx == img_idx)
+                    line = obj.lines_2d(i).line;
+                    return ;
+                end
+            end
+            % if not found
+            line = [];
+            return ;
         end
     end
 end

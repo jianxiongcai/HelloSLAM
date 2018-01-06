@@ -53,27 +53,54 @@ end
 
 function [flag] = is_similiar(threshold,angular_threshold, line1, line2)
     % determine whether to merge this two lines or not
+    ori1 = get_line_oriention(line1);
+    ori2 = get_line_oriention(line2);
+    theta = abs(ori1-ori2);
+    if (theta > pi/2)
+        theta = pi - theta;
+    end
+    % check angle difference
+    if ( theta > angular_threshold)
+        flag = 0;
+        return ;
+    end
+    
+    % check if any endpoint lines in another line
+    % if any point is on the line
+    if ((is_on_line(line1(1:2,1),line2(1:4,1)) == 1) ||...
+            (is_on_line(line1(3:4,1),line2(1:4,1)) == 1) ||...
+            (is_on_line(line2(1:2,1),line1(1:4,1)) == 1) ||...
+            (is_on_line(line2(3:4,1),line1(1:4,1)) == 1))
+        flag = 1;
+        return ;
+    end
+    
+    % check the endpoints difference
     if ((get_distance(line1(1:2,1), line2(1:2,1)) < threshold) ||...
             (get_distance(line1(3:4,1), line2(1:2,1)) < threshold) || ...
             (get_distance(line1(1:2,1), line2(3:4,1)) < threshold) || ...
             (get_distance(line1(3:4,1), line2(3:4,1)) < threshold))
-        ori1 = get_line_oriention(line1);
-        ori2 = get_line_oriention(line2);
-        theta = abs(ori1-ori2);
-        if (theta > pi/2)
-            theta = pi - theta;
-        end
-        if ( theta < angular_threshold)
-            flag = 1;
-        else
-            flag = 0;
-        end
-        return;
+        flag = 1;
     else
         flag = 0;
     end
 end
 
-function [dist] = get_distance(point1, point2)
-    dist = norm([point1(1)-point2(1), point1(2) - point2(2)]);
+function [flag] = is_on_line(point, line_in)
+    % determine if a point is on the line
+    % if point is on the line, the directiona are of opposite direction
+    
+    % threshold is set for 10 degrees
+    thershold = -0.9848;
+    
+    d1 = point(1:2,1)-line_in(1:2,1);
+    d1 = d1/norm(d1);
+    d2 = point(1:2,1)-line_in(3:4,1);
+    d2 = d2/norm(d2);
+    
+    if (d1'*d2 < thershold)
+        flag = 1;
+    else
+        flag = 0;
+    end
 end
