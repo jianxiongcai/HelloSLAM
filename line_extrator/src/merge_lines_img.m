@@ -9,38 +9,12 @@ function [ lines_res ] = merge_lines_img(dist_thres, angular_thres, eli_thres, t
 %       eli_thres:              lines > the threshold will be kept
 %       txt_path:               the path to read lines
     % read in all lines from the image
-    lines = read_in_lines(txt_path);
-    i = 1;
-    while ( i <= size(lines,2) )
-        line_i = lines(:,i);
-        % merge lines with line i
-        j = 1;
-        offset = 0;
-        while ( j <= size(lines,2) )
-            if (i == j)
-                j = j + 1;
-                continue;
-            end
-            flag = is_similiar(dist_thres,angular_thres, line_i, lines(:,j));
-            if (flag == 1)
-                % merge lines
-                line_i = line_merging( line_i, lines(:,j));
-                
-                %discard the jth element
-                lines = [lines(:,1:j-1) lines(:,j+1:end)];
-                
-                % update ith element
-                if (i>j)
-                    i = i - 1;
-                end
-                lines(:,i) = line_i;
-            else
-                j = j + 1;
-            end
-        end
-        i = i + 1;
+    lines_raw = read_in_lines(txt_path);
+    % merge lines until no lines can be merged again
+    merge_flag = 0;
+    while(merge_flag == 0)
+        [lines,merge_flag] = merge_lines(lines_raw,dist_thres,angular_thres);
     end
-    
     
     % elimite lines with distance smaller then threshold
     lines_res = [];
@@ -52,6 +26,32 @@ function [ lines_res ] = merge_lines_img(dist_thres, angular_thres, eli_thres, t
     
     % merge all lines that is similar
     [lines_res] = merge_similar_final(lines_res, 0.01*1080);
+end
+
+function [lines, merge_flag] = merge_lines(lines_raw,dist_thres,angular_thres)
+    % merge all lines
+    merge_flag = 0;
+    lines = [];
+    for i = 1:1:size(lines_raw,2)
+        matched_flag = 0;
+        line_i = lines_raw(:,i);
+        for j = 1:1:size(lines,2)
+            flag = is_similiar(dist_thres,angular_thres, line_i, lines(:,j));
+            if (flag == 1)
+                % merge lines
+                line_new = line_merging( line_i, lines(:,j));
+                lines(:,j) = line_new;
+                matched_flag = 1;
+                merge_flag = 1;
+                break;
+            end
+        end
+        
+        if (matched_flag == 0)
+            % add the line to the final result
+            lines = [lines lines_raw(:,i)];
+        end
+    end
 end
 
 function [lines_res] = merge_similar_final(lines, threshold)
