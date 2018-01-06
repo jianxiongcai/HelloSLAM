@@ -53,35 +53,27 @@ end
 
 function [flag] = is_similiar(threshold,angular_threshold, line1, line2)
     % determine whether to merge this two lines or not
-    ori1 = get_line_oriention(line1);
-    ori2 = get_line_oriention(line2);
-    theta = abs(ori1-ori2);
-    if (theta > pi/2)
-        theta = pi - theta;
-    end
-    % check angle difference
-    if ( theta > angular_threshold)
-        flag = 0;
-        return ;
-    end
-    
-    % check if any endpoint lines in another line
-    % if any point is on the line
-    if ((point_to_line_dist(line1(1:2,1),line2(1:4,1)) < 10) ||...
-            (point_to_line_dist(line1(3:4,1),line2(1:4,1)) < 10) ||...
-            (point_to_line_dist(line2(1:2,1),line1(1:4,1)) < 10) ||...
-            (point_to_line_dist(line2(3:4,1),line1(1:4,1)) < 10))
-        flag = 1;
-        return ;
-    end
-    
-    % check the endpoints difference
     if ((get_distance(line1(1:2,1), line2(1:2,1)) < threshold) ||...
             (get_distance(line1(3:4,1), line2(1:2,1)) < threshold) || ...
             (get_distance(line1(1:2,1), line2(3:4,1)) < threshold) || ...
             (get_distance(line1(3:4,1), line2(3:4,1)) < threshold))
-        flag = 1;
+        ori1 = get_line_oriention(line1);
+        ori2 = get_line_oriention(line2);
+        theta = abs(ori1-ori2);
+        if (theta > pi/2)
+            theta = pi - theta;
+        end
+        if ( theta < angular_threshold)
+            flag = 1;
+        else
+            flag = 0;
+        end
+        return;
     else
         flag = 0;
     end
+end
+
+function [dist] = get_distance(point1, point2)
+    dist = norm([point1(1)-point2(1), point1(2) - point2(2)]);
 end
