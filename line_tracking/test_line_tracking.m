@@ -7,7 +7,8 @@ lines_path = fullfile('..','data','lines');
 
 io = IOData(img_path, lines_path);
 
-for idx = 1:10:200
+for idx = 1:10:500
+    disp(strcat('Processing: ', num2str(idx)));
     img = io.read_pgm(idx);
     lines = io.read_lines(idx);
     % for the first frame
@@ -19,3 +20,5 @@ for idx = 1:10:200
     % for other frames
     line_tracker.add_img(img,lines,idx);
 end
+
+line_tracker.eliminate_useless(3);

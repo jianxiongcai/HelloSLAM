@@ -69,7 +69,10 @@ classdef LinesTracker < handle
                 matched_flag = 0;
                 for j = 1:1:size(obj.lines_idx_pre,2)
                     [line_pre] = obj.lines_tracking(obj.lines_idx_pre(j)).get_line(obj.img_idx_pre);
-                    if (is_similar(lines(:,i), line_pre, 0.05*1080) == 1)
+                    % check distance and orientation similiarity
+                    % chcek mutual closest at the same time
+                    if ((is_similar(lines(:,i), line_pre, 0.05*1080) == 1) &&...
+                            (min(find_best_match(line_pre,lines) == lines(:,i)) == 1))
                         % update the line tracking process
                         obj.lines_tracking(obj.lines_idx_pre(j)).add_line(img_idx,lines(:,i));
                         lines_idx = [lines_idx obj.lines_idx_pre(j)];
@@ -106,6 +109,21 @@ classdef LinesTracker < handle
             
             
         end
+        
+        function eliminate_useless(obj, num_lines)
+            % Input:
+            %       num_lines:          the threshold for accept the line
+            % this function elimate all useless lines. i.e. lines appear
+            % only in one images
+            lines_tracking_new = [];
+            for i = 1:1:size(obj.lines_tracking,2)
+                if (obj.lines_tracking(i).get_num_lines() >= num_lines)
+                        lines_tracking_new = [lines_tracking_new obj.lines_tracking(i)];
+                end
+            end
+            % update lines tracking
+            obj.lines_tracking = lines_tracking_new;
+        end
     end
 end
 
@@ -121,6 +139,7 @@ function [flag] = is_element(A,x)
     flag = 0;
 end
     
+
 % determine if two lines are the same line
 function [flag] = is_similar(line1, line2, threshold)
     if ((size(line1,1) < 4) || (size(line1,2) ~= 1) ||...
@@ -137,11 +156,7 @@ function [flag] = is_similar(line1, line2, threshold)
     end
     
     % get point to line distance
-    d1 = point_to_line_dist(line1(1:2,1),line2(1:4,1));
-    d2 = point_to_line_dist(line1(3:4,1),line2(1:4,1));
-    d3 = point_to_line_dist(line2(1:2,1),line1(1:4,1));
-    d4 = point_to_line_dist(line2(3:4,1),line1(1:4,1));
-    d = min([d1 d2 d3 d4]);
+    d = compute_lines_dist( line1, line2 );
     if (d > threshold)
         flag = 0;
         return; 
@@ -171,4 +186,16 @@ function [points_new] = normalize_points(points)
     for i = 1:1:size(points,2)
         points_new(:,i) = points(:,i)/points(3,i);
     end
+end
+
+
+function [line] = find_best_match(line_in, pool)
+    % compute all distances
+    dists = zeros(1,size(pool,2));
+    for i = 1:1:size(pool,2)
+        dists(i) = compute_lines_dist(line_in, pool(:,i));
+    end
+    % select the best score
+    [min_d,min_idx] = min(dists);
+    line = pool(:,min_idx);
 end
