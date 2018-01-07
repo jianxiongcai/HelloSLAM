@@ -36,7 +36,8 @@ function [lines, merge_flag] = merge_lines(lines_raw,dist_thres,angular_thres)
         matched_flag = 0;
         line_i = lines_raw(:,i);
         for j = 1:1:size(lines,2)
-            flag = is_similiar(dist_thres,angular_thres, line_i, lines(:,j));
+            flag = is_similiar(dist_thres,angular_thres, line_i, lines(:,j)) || ...
+                is_overlapping(line_i,lines(:,j));
             if (flag == 1)
                 % merge lines
                 line_new = line_merging( line_i, lines(:,j));
@@ -100,6 +101,27 @@ function [flag] = is_similiar(threshold,angular_threshold, line1, line2)
             flag = 0;
         end
         return;
+    else
+        flag = 0;
+    end
+end
+
+function [flag] = is_overlapping(line1,line2)
+    % determine if two lines are overlapping or not
+    % check orientation
+    ori1 = get_line_oriention(line1);
+    ori2 = get_line_oriention(line2);
+    if (abs(ori1 - ori2) > pi/180)
+        flag = 0;
+        return;
+    end
+    % check point to line difference
+    threshold = 10;
+    if ((point_to_line_dist(line1(1:2,:),line2) < threshold) ||...
+            (point_to_line_dist(line1(3:4,:),line2) < threshold) ||...
+            (point_to_line_dist(line2(1:2,:),line1) < threshold) ||...
+            (point_to_line_dist(line2(3:4,:),line1) < threshold))
+        flag = 1;
     else
         flag = 0;
     end
