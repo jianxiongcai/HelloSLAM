@@ -18,7 +18,6 @@ inliers = cell(1,length(dList)-1);
 for i = 1:length(dList)
     tic
     im = imread(fullfile(dList(i).folder,dList(i).name));
-    %ims{i} = rgb2gray(ims{i});
     features{1,i} = detectSURFFeatures(im);
     features{2,i} = extractFeatures(im,features{1,i});
     toc
