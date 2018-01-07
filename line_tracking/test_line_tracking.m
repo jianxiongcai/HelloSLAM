@@ -21,4 +21,4 @@ for idx = 1:10:500
     line_tracker.add_img(img,lines,idx);
 end
 
-line_tracker.eliminate_useless(3);
+line_tracker.eliminate_useless(5);

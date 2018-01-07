@@ -15,14 +15,18 @@ mkdir(saving_folder);
 % extract frames and save to the folder
 v = VideoReader(video_path);
 frame_id = 10001;
+cnt = 0;
 while hasFrame(v)
     f = readFrame(v);
     % save each indivual frames to file system
-    cnt = 0;
     if mod(cnt,interval) == 0
+        % rotate image maybe
+        img =  imrotate(f,-90);
+        
+        cnt = 0;
         file_path = fullfile(pwd,saving_folder,strcat(num2str(frame_id),'.pgm'));
         imwrite(img,file_path);
-        disp(strcat('[OK] frame_id: ',num2str(frame_id)));
+        disp(strcat('[OK] frame_id: ',num2str(frame_id),'  Current Time: ', num2str(v.currentTime)));
         frame_id = frame_id + 1;
     end
     cnt = cnt + 1;
