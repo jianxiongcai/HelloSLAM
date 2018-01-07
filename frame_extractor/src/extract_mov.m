@@ -1,5 +1,8 @@
 % read in video frames
 % video_paths = {'activity_room_1_video','activity_room_2_video','dorm_room_1_video','dorm_room_2_data','elevator_1_video','elevator_2_video'};
+
+interval = 3;
+
 data_dir = fullfile('..','..','data');
 video_paths = dir(fullfile(data_dir,'*.MOV'));
 video_path = fullfile(data_dir,video_paths(1).name);
