@@ -43,8 +43,9 @@ classdef LineTracking < handle
         function [num] = get_num_lines(obj)
             % return how many 2D image line has been registered for this
             % line
-            num = size(obj.lines_2d,1);
+            num = size(obj.lines_2d,2);
         end
+        
     end
 end
 
