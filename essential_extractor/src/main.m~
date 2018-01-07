@@ -40,17 +40,13 @@ for i = 1:length(dList)-1
     B_temp = K\homoptsB;
     B_norms = sqrt(sum(B_temp.*B_temp));
     B_normalized = double(B_temp./repmat(A_norms, 3, 1));
-    [RT{i}, ilrs] = opengv('fivept_stewenius_ransac', A_normalized, B_normalized);
-    inliers{i} = [homoptsA(:, ilrs); homoptsB(:, ilrs)];
+    [RT{i}, inliers{i}] = opengv('fivept_stewenius_ransac', A_normalized, B_normalized);
+    
 end
 
 % Rescale
-for i = 2:length(dList)-1
-    correspondence = find_correspondence(inliers{i}, inliers{i+1});
-    world_point_BA = find_3D_point(correspondence(4:5, :), correspondence(1:2, :), RT{i});
-    world_point_BC = find_3D_point(correspondence(4:5, :), correspondence(7:8, :), RT{i+1});
-    scale = median(world_point_BA(:, 3)./world_point_BC(:, 3));
-    R{i+1}(:,4) = scale * R{i+1}(:,4);
+for i = 1:length(dList)-1
+    correspondence = find_correspondence(inliers{i}, inliers2.inliers);
 end
 
 save('RT.mat','RT');
