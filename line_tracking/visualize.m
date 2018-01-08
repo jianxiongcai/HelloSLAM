@@ -9,17 +9,18 @@ io = IOData(img_path, lines_path);
 % start visualization
 line_objs = line_tracker.lines_tracking;
 
-for i = 1:1:size(line_objs,2)
+for i = 1:1:1
     figure;
     lines = line_objs(i).lines_2d;
-    for j = 1:1:size(lines,2)
+    for j = 3:1:4
+        figure;
         img_idx = lines(j).img_idx;
         line_2d = lines(j).line;
         imshow(io.read_pgm(img_idx));
         hold on;
         plot_line(line_2d,'g',1);
         hold off;
-        pause(0.5);
+        
     end
-    close all;
+    
 end
