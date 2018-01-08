@@ -1,3 +1,9 @@
+%%%%%%%
+% Hello SLaM 
+% Visualization of the trajectory of the camera.
+%%%%%%%
+
+%%
 clear;
 clc;
 

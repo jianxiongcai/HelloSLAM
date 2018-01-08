@@ -1,5 +1,16 @@
+%%%
+% Preprocessing of Manhattan frame extraction.
+% First we generate a gaussian sphere then project the lines onto the 
+% gaussian sphere, which genenerates a intepretation plane. To cast the 
+% votes, we find the norm vector of the intepretation plane and calculate 
+% the angle between the norm vector and each vectors in the discretized 
+% gaussian sphere. If the angle is smaller than a threshold (e.g. 0.03 rad)
+% , then the vector on gaussian sphere will add the length of the line as 
+% one vote.
+%%%
 function [g_sph,votes] = vote(K,dList,Rraw)
-    % Create a discrete gaussian sphere of 10201 vectors, and one more dimension for votes.
+    % Create a discrete gaussian sphere of 10201 vectors, and one more 
+    % dimension for votes.
     [sx,sy,sz] = sphere(100);
     g_sph = [sx(:) sy(:) sz(:)]';
     votes = zeros(1,10201);

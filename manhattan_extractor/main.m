@@ -16,7 +16,8 @@ K = [3445.70873,          0, 2043.54468;
               0,          0,          1];
 
 tic;
+% Vote on the gaussian sphere.
 [g_sph,votes] = vote(K,dList,Rraw);
-%load('tmp.mat');
+% Mark up the corresponding manhattan directions of the lines.
 [M,lns] = extractManhattan(g_sph,votes,dList,Rraw,K);
 toc;

@@ -1,6 +1,10 @@
+%%%
+% Manhattan frame extraction(only extract the frame from 1st frame)
+%%%
 function [M,lns] = extractManhattan(g_sph,votes,dList,Rraw,K)
-    % Manhattan frame extraction(only extract the frame from 1st frame)
+    
     sorted_votes = sort(votes,'descend');
+    % Extract z axis w.r.t. the direction of gravity. 
     for i = 1:100
         z = [0;0;1];
         idx = find(votes == sorted_votes(i));
@@ -14,9 +18,8 @@ function [M,lns] = extractManhattan(g_sph,votes,dList,Rraw,K)
             break
         end
     end
-
-    %man_z = [0;0;1];
     
+    % Extract x axis w.r.t. the direction of z. 
     for i = 1:500
         idx = find(votes == sorted_votes(i));
         ptx = g_sph(:,idx(1));
@@ -32,6 +35,7 @@ function [M,lns] = extractManhattan(g_sph,votes,dList,Rraw,K)
         end
     end
     
+    % Extract y axis w.r.t. the direction of x and z. 
     for i = 1:500
         idx = find(votes == sorted_votes(i));
         pty = g_sph(:,idx(1));
@@ -54,7 +58,9 @@ function [M,lns] = extractManhattan(g_sph,votes,dList,Rraw,K)
     
     C = K;
     
-    M = [man_x man_y man_z]
+    M = [man_x man_y man_z];
+    
+    % Mark up the manhattan directions of the lines.
     for i = 1:size(dList,1)
         disp(strcat('Marking: ',num2str(i)));
         lines = load(fullfile(dList(i).folder,dList(i).name));
