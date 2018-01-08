@@ -8,7 +8,8 @@ P1 = [eye(3,3) zeros(3,1)];
 R = eye(3,3);
 T = [1;1;0];
 % essential matrix
-E =  
+Tx = [0 -T(3) T(2) ; T(3) 0 -T(1) ; -T(2) T(1) 0 ];
+E = R * Tx;
 
 P2 = [R T];
 
