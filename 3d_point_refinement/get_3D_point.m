@@ -24,10 +24,10 @@ b2 = -epipolar_line_end_A(3,1)/epipolar_line_end_A(2,1);
 % Calculate the line in frame B.
 start_B = start_B./start_B(3,1);
 end_B = end_B./end_B(3,1);
-x1 = start_B(2,1);
-y1 = start_B(2,2);
-x2 = end_B(2,1);
-y2 = end_B(2,2);
+x1 = start_B(1,1);
+y1 = start_B(2,1);
+x2 = end_B(1,1);
+y2 = end_B(2,1);
 k = (y1-y2)/(x1-x2);
 b = (x1*y2-x2*y1)/(x1-x2);
 
@@ -45,7 +45,7 @@ A = [X1*[0,0,1,0]-[1,0,0,0];
      X2*RT(3,:)-RT(1,:);
      Y2*RT(3,:)-RT(2,:)];
 [~,~,V] = svd(A);
-world_point = V(:,4)'./V(4,4);
+world_point = V(:,4)./V(4,4);
 
 X1 = end_A(1,1);
 Y1 = end_A(2,1);
@@ -56,6 +56,6 @@ B = [X1*[0,0,1,0]-[1,0,0,0];
      X2*RT(3,:)-RT(1,:);
      Y2*RT(3,:)-RT(2,:)];
 [~,~,V] = svd(B);
-world_point = [world_point V(:,4)'./V(4,4)];
+world_point = [world_point V(:,4)./V(4,4)];
 
 end
