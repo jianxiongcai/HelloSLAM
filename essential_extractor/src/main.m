@@ -42,6 +42,11 @@ for i = 1:length(dList)-1
     [relativeOrientation,relativeLocation] = relativeCameraPose(essential{i},cameraParams,inlierPoints1,inlierPoints2);
     [rotationMatrix,translationVector] = cameraPoseToExtrinsics(relativeOrientation,relativeLocation);
     RT{i} = [rotationMatrix,translationVector'];
+    tx = translationVector;
+    tx = [    0 , -tx(3),  tx(2);
+           tx(3),     0 , -tx(1);
+    	  -tx(2),  tx(1),     0 ];
+    E{i} = rotationMatrix * tx;
 end
 
 %% Save 2 results
