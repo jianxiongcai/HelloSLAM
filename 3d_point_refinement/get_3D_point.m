@@ -8,6 +8,7 @@
 % coordinates of these endpoints.
 
 function world_point = get_3D_point(E, RT, start_A, end_A, start_B, end_B)
+
 % E is the essential matrix. (3*3)
 % RT is the rotation and transformation from frame A to B.
 % start and end only means the endpoints of lines, no direct difference. A 
