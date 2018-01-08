@@ -21,6 +21,9 @@ for i = 1:size(line_tracker.lines_tracking, 2)
         line_B = line_tracker.lines_tracking(1,i).lines_2d(j+1).line;
         if (sum(abs(line_A-line_B)) < 100)
             T = get_3D_point(essential{idx}, RT{idx}, [line_A(1:2,:); 1], [line_A(3:4,:); 1], [line_B(1:2,:); 1], [line_B(3:4,:); 1]);
+            for m = idx-1:-1:1
+                T = [RT{m}; 0 0 0 0]*T;
+            end
             W = [W T];
         end
     end
