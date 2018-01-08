@@ -1,14 +1,14 @@
 % tracking simulator
-function [line1, line2] = simu(line_3d)
+function [line1, line2,R,T,E] = simu(line_3d)
     pointS = [line_3d(1:3); 1];
     pointE = [line_3d(4:6); 1];
 
     P1 = [eye(3,3) zeros(3,1)];
     % rotation and translation matrix
-    % R =     [1.0000         0         0;
-    %          0    0.4081   -0.9129;
-    %          0    0.9129    0.4081;];
-    R = eye(3);
+     R =     [1.0000         0         0;
+              0    0.4081   -0.9129;
+              0    0.9129    0.4081;];
+    %R = eye(3);
     T = [1;1;1];
     % essential matrix
     Tx = [0 -T(3) T(2) ; T(3) 0 -T(1) ; -T(2) T(1) 0 ];
