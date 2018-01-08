@@ -17,6 +17,7 @@ for i = 1:2:size(world_points, 2)
     Y = world_points(2,i:i+1);
     Z = world_points(3,i:i+1);
     plot3(X,Y,Z)
+    axis([-100 100 0 100 -100 100]);
 end
 
 end
