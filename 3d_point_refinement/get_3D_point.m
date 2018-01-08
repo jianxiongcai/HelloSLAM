@@ -14,9 +14,11 @@ function world_point = get_3D_point(E, RT, start_A, end_A, start_B, end_B)
 % start and end only means the endpoints of lines, no direct difference. A 
 % and B means two frames. All points illustrates in homography. (3*1)
 
+K = [1792.3 0 0; 0 1792.3 0; 960.2 537.1 1];
+
 % Calculate the epipolar lines in opposite frames.
-epipolar_line_start_A = E*start_A;
-epipolar_line_end_A = E*end_A;
+epipolar_line_start_A = E*K'*start_A;
+epipolar_line_end_A = E*K'*end_A;
 k1 = -epipolar_line_start_A(1,1)/epipolar_line_start_A(2,1);
 b1 = -epipolar_line_start_A(3,1)/epipolar_line_start_A(2,1);
 k2 = -epipolar_line_end_A(1,1)/epipolar_line_end_A(2,1);
