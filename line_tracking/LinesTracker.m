@@ -71,7 +71,7 @@ classdef LinesTracker < handle
                     [line_pre] = obj.lines_tracking(obj.lines_idx_pre(j)).get_line(obj.img_idx_pre);
                     % check distance and orientation similiarity
                     % chcek mutual closest at the same time
-                    if ((is_similar(lines(:,i), line_pre, 0.05*1080) == 1) &&...
+                    if ((is_similar(lines(:,i), line_pre, 0.01*1080) == 1) &&...
                             (min(find_best_match(line_pre,lines) == lines(:,i)) == 1))
                         % update the line tracking process
                         obj.lines_tracking(obj.lines_idx_pre(j)).add_line(img_idx,lines(:,i));
