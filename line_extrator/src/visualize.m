@@ -1,6 +1,7 @@
 % visualize any data
 figure;
-for idx = 10001:1:10200
+for idx = 10140:1:10140
+    disp(idx)
     path1 = strcat(num2str(idx),'.pgm');
     path2 = strcat(num2str(idx),'.mat');
     path1 = fullfile('..','..','data','rgb',path1);
