@@ -3,14 +3,24 @@
 This project aims to create 3D panorama with line tracking approach. The main pipeline is following. 
 
 ## File Structure
+- presentation: A folder containing all material used in the presentation. Besides, a MATLAB figure used for demo result is also in this folder.
 - data (user input folder)
 - frame_extractor: frame extraction from video
 - line_extrator: line extraction from pgm files
 - 3d_point_refinement: Do some refinement on the line extracted before and output the results in a 3D line cloud way.
+- TODO
 
 ## Usage
 ### Input data
 Put the input data (IMU data and video) in folder 'data'.
+
+### Detail usage:
+Other usage please refer to detailed README in each sub-folder (sub-program) following this order. (You may skip some steps if you downloaded pre-processed data)
+- frame_extractor
+- line_extrator
+- line_tracking
+- TODO
+
 
 ### frame_extractor
 Run extract.m (remember to modify the target mp4 name list)
