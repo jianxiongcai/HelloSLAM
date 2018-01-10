@@ -101,4 +101,4 @@ VisualSFM : A Visual Structure from Motion System. Available at http://ccwu.me/v
 
 - ZENG XIANGCHEN, zengxch@shanghaitech.edu.cn
 
-- GAO LING, gaoling1@shanghaitech.edu.cn
+- GAO LING, gaoling@shanghaitech.edu.cn
