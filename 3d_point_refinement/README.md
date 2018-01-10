@@ -5,6 +5,4 @@ This folder is mainly the last part of this project. It covers the final refinem
 Require MATLAB to run.  
 Run ```main.m``` to see the final result. We provide a ```Line_Cloud.fig``` as a result used in presentation. The other files are the functions used in this folder. 
 ## Details.
-What is the purpose for this function?  
-What is the outline for this?  
-You can find out in the matlab file. There exists very detailed instuctions inside.
+You can find out detailed explaination about functions and outlines in the matlab file. There exists very detailed instuctions inside.

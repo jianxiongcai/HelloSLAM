@@ -6,12 +6,12 @@ This project aims to create 3D panorama with line tracking approach. The main pi
 - **presentation**: A folder containing all material used in the presentation. Besides, a MATLAB figure used for demo result is also in this folder.
 - **data** (user input folder)
 - **frame_extractor**: frame extraction from video
-- **essentail_extractor**: extract essential and transformation from frames
+- **line_extractor**: line extraction from pgm files
+- **essential_extractor**: extract essential and transformation from frames
 - **imuXvideo** (forked and modified from [jasonhu5](https://github.com/jasonhu5)): an APP to capture the IMU data and videos
-- **line_extrator**: line extraction from pgm files
+- **line_tracking**: line tracking using the results from line_extractor
 - **3d\_point_refinement**: Do some refinement on the line extracted before and output the results in a 3D line cloud way.
-- **manhattan_extractor**: extract manhattan frames and manhattan lines from data
-- TODO
+- **manhattan_extractor**: extract Manhattan frames and Manhattan lines from data
 
 ## Usage
 ### Input data
@@ -21,27 +21,21 @@ Put the input data (IMU data and video) in folder 'data'.
 Other usage please refer to detailed README in each sub-folder (sub-program) following this order. (You may skip some steps if you downloaded pre-processed data)  
 
 - **frame_extractor**
+- **line_extractor**
 - **essential_extractor**
 - **imuXvideo**
-- **line_extrator**
 - **line_tracking**
 - **manhattan_extractor**
-- TODO
+- **3d\_point_refinement**
 
 
 ### frame_extractor
-Run extract.m (remember to modify the target mp4 name list).
+For extracting frame from MP4 file, run *extract.m*
+For extracting frame from MOV file, run *extract_mov.m*
+This will create 'rgb' folder to store the resulting pgm (actually images are gray value images...)
 
-### essential_extractor
-Require MATLAB to run.  
-Run ```src\main.m``` to extract the essential matrices and the camera transformation matrices between 2 extracted frames. Run ```visualization.m``` to see the trajectory result.
-
-### imuXvideo
-Open ```FYP.xcodeproj``` using Xcode.  
-Connect you iOS device and choose the device at the selector near "Run" button.  
-Run it on the device.
-
-### line_extrator
+### line_extractor
+#### LSD line extraction
 Require python3 installed and Ubuntu System (macOS System is also supported).
 ```
 $ ./setup.sh 
@@ -53,16 +47,36 @@ $ ./setup.sh.
 $ python3 extract.py
 ``` 
 
-Require MATLAB to run, this will create 'xxx-merge' folder and save results (.mat) in.
+#### Lines merging
+Require MATLAB to run, this will create 'lines' folder and save results (.mat) in.
 ```
 main.m
 ```
+
+
+### essential_extractor
+Require MATLAB to run.  
+Run ```src\main.m``` to extract the essential matrices and the camera transformation matrices between 2 extracted frames. Run ```visualization.m``` to see the trajectory result.
+
+### imuXvideo
+Open ```FYP.xcodeproj``` using Xcode.  
+Connect you iOS device and choose the device at the selector near "Run" button.  
+Run it on the device.
+
+### Line Tracking
+Require MATLAB to run. 
+run ```main.m```
 
 ### manhattan_extractor
 Download the dataset and unzip it into the ```../data/``` folder.
 Require MATLAB to run.  
 Run ```../frame_extractor/src/extract.m``` to extract the frames first (the ```interval``` parameter in it should be set to 3), and run the ```../line_extrator``` contents follow the instuctions.   
 Run ```main.m```, the path of the data need to be modified. After running ```main.m```, run ```visualize.m``` see the results.  
+
+### 3d\_point_refinement
+Refer to detailed README.md in the folder.
+
+### Dataset
 Download the corresponding datasets here:  
 [Dataset 1](http://oxygvbxux.bkt.clouddn.com/dataset1.zip)(Laundry Room),  
 [Dataset 2](http://oxygvbxux.bkt.clouddn.com/dataset2.zip)(Vending Machine),  
