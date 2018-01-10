@@ -12,6 +12,7 @@ This project aims to create 3D panorama with line tracking approach. The main pi
 - **line_tracking**: line tracking using the results from line_extractor
 - **3d\_point_refinement**: Do some refinement on the line extracted before and output the results in a 3D line cloud way.
 - **manhattan_extractor**: extract Manhattan frames and Manhattan lines from data
+- ** playground ** : where we try OpenSource library/examples with our own data.
 
 ## Dataset
 Download the corresponding datasets here:  
