@@ -13,6 +13,13 @@ This project aims to create 3D panorama with line tracking approach. The main pi
 - **3d\_point_refinement**: Do some refinement on the line extracted before and output the results in a 3D line cloud way.
 - **manhattan_extractor**: extract Manhattan frames and Manhattan lines from data
 
+## Dataset
+Download the corresponding datasets here:  
+[Dataset 1](http://oxygvbxux.bkt.clouddn.com/dataset1.zip)(Laundry Room),  
+[Dataset 2](http://oxygvbxux.bkt.clouddn.com/dataset2.zip)(Vending Machine),  
+[Dataset 3](http://oxygvbxux.bkt.clouddn.com/dataset1.zip)(SIST Corridor).
+
+
 ## Usage
 ### Input data
 Put the input data (IMU data and video) in folder 'data'.
@@ -35,8 +42,8 @@ For extracting frame from MOV file, run *extract_mov.m*
 This will create 'rgb' folder to store the resulting pgm (actually images are gray value images...)
 
 ### line_extractor
-#### LSD line extraction
-Require python3 installed and Ubuntu System (macOS System is also supported).
+##### LSD line extraction
+Require python3 installed and Ubuntu System (macOS System is also supported). This will read in 'data/rgb' and store results into 'lines-raw'
 ```
 $ ./setup.sh 
 $ ./extract.py
@@ -47,10 +54,10 @@ $ ./setup.sh.
 $ python3 extract.py
 ``` 
 
-#### Lines merging
+##### Lines merging (also in line_extractor folder)
 Require MATLAB to run, this will create 'lines' folder and save results (.mat) in.
 ```
-main.m
+src/main.m
 ```
 
 
@@ -75,13 +82,6 @@ Run ```main.m```, the path of the data need to be modified. After running ```mai
 
 ### 3d\_point_refinement
 Refer to detailed README.md in the folder.
-
-### Dataset
-Download the corresponding datasets here:  
-[Dataset 1](http://oxygvbxux.bkt.clouddn.com/dataset1.zip)(Laundry Room),  
-[Dataset 2](http://oxygvbxux.bkt.clouddn.com/dataset2.zip)(Vending Machine),  
-[Dataset 3](http://oxygvbxux.bkt.clouddn.com/dataset1.zip)(SIST Corridor).
-
 
 ## Reference
 Ikehata, S., Boyadzhiev, I., Shan, Q., & Furukawa, Y. (2016). Panoramic Structure from Motion via Geometric Relationship Detection. Retrieved from http://arxiv.org/abs/1612.01256
