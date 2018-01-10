@@ -80,6 +80,7 @@ VisualSFM : A Visual Structure from Motion System. Available at http://ccwu.me/v
 - This project is the repository for CS284 SLAM Course Project, under supervision of Prof.laurent kneip , ShanghaiTech University.
 - Line Extraction part is using LSD, the opensource library. Available at http://www.ipol.im/pub/art/2012/gjmr-lsd/
 - Some related works results used in presentation is using MATLAB SfM example and VisualSFM to produce.
+- The imuXvideo APP is forked and modified from [jasonhu5](https://github.com/jasonhu5)'s project.
 
 ## Contact
 - CAI JIANXIONG, caijx@shanghaitech.edu.cn
