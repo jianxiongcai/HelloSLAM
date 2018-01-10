@@ -1,6 +1,6 @@
 # HelloSLAM
 ## Description
-This project aims to create 3D panorama with line tracking approach. The main pipeline is following. 
+This project aims to create 3D panorama with line tracking approach. The main pipeline is in the presentation pdf.
 
 ## File Structure
 - **presentation**: A folder containing all material used in the presentation. Besides, a MATLAB figure used for demo result is also in this folder.
