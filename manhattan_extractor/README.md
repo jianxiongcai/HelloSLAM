@@ -5,11 +5,12 @@ This part of codes can extract the manhattan frame and manhatten lines from the 
 ## Usage
 Download the dataset and unzip it into the ```../data/``` folder.
 Require MATLAB to run.  
+Run ```../frame_extractor/src/extract.m``` to extract the frames first (the ```interval``` parameter in it should be set to 3), and run the ```../line_extrator``` contents follow the instuctions.   
 Run ```main.m```, the path of the data need to be modified. After running ```main.m```, run ```visualize.m``` see the results.  
 Download the corresponding datasets here:  
-[Dataset 1]()(Laundry Room),  
-[Dataset 2]()(Vending Machine),  
-[Dataset 3]()(Lobby).
+[Dataset 1](http://oxygvbxux.bkt.clouddn.com/dataset1.zip)(Laundry Room),  
+[Dataset 2](http://oxygvbxux.bkt.clouddn.com/dataset2.zip)(Vending Machine),  
+[Dataset 3](http://oxygvbxux.bkt.clouddn.com/dataset1.zip)(SIST Corridor).
 
 ## Expected Results  
 ![](https://raw.githubusercontent.com/ernestcai/HelloSLAM/epipolar-dev/presentation/pics/manhattan1.jpg)  
