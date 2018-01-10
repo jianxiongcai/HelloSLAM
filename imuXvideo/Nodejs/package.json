@@ -1,0 +1,15 @@
+{
+  "name": "imu_real_time",
+  "version": "1.0.0",
+  "description": "receive imu data sent from socketio sockets",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jasonhu5",
+  "license": "ISC",
+  "dependencies": {
+    "socket.io": "^1.7.2",
+    "socket.io-client": "^1.7.2"
+  }
+}
