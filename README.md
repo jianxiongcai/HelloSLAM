@@ -84,11 +84,11 @@ Run ```main.m```, the path of the data need to be modified. After running ```mai
 Refer to detailed README.md in the folder.
 
 ## Reference
-Ikehata, S., Boyadzhiev, I., Shan, Q., & Furukawa, Y. (2016). Panoramic Structure from Motion via Geometric Relationship Detection. Retrieved from http://arxiv.org/abs/1612.01256
-Tavares, J. (1995). A new approach for merging edge line segments. RecPad95, (January). Retrieved from http://repositorio-aberto.up.pt/handle/10216/420
-Grompone von Gioi, R., Jakubowicz, J., Morel, J.-M., & Randall, G. (2012). LSD: a Line Segment Detector. Image Processing On Line, 2, 35–55. https://doi.org/10.5201/ipol.2012.gjmr-lsd
-Coughlan, J. M. (1999). Manhattan World : Compass Direction from a Single Image by Bayesian Inference 2 Previous Work and Three- Dimen- sional Geometry. Camera, 0(c).
-VisualSFM : A Visual Structure from Motion System. Available at http://ccwu.me/vsfm/
+- Ikehata, S., Boyadzhiev, I., Shan, Q., & Furukawa, Y. (2016). Panoramic Structure from Motion via Geometric Relationship Detection. Retrieved from http://arxiv.org/abs/1612.01256
+- Tavares, J. (1995). A new approach for merging edge line segments. RecPad95, (January). Retrieved from http://repositorio-aberto.up.pt/handle/10216/420
+- Grompone von Gioi, R., Jakubowicz, J., Morel, J.-M., & Randall, G. (2012). LSD: a Line Segment Detector. Image Processing On Line, 2, 35–55. https://doi.org/10.5201/ipol.2012.gjmr-lsd
+- Coughlan, J. M. (1999). Manhattan World : Compass Direction from a Single Image by Bayesian Inference 2 Previous Work and Three- Dimen- sional Geometry. Camera, 0(c).
+- VisualSFM : A Visual Structure from Motion System. Available at http://ccwu.me/vsfm/
 
 ## Acknowledgment 
 - This project is the repository for CS284 SLAM Course Project, under supervision of Prof.laurent kneip , ShanghaiTech University.
