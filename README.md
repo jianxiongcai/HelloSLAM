@@ -50,7 +50,7 @@ main.m
 
 ### manhattan_extractor
 Require MATLAB to run.  
-Run ```src\main.m```, the path of the data need to be modified. After running ```main.m```, run ```visualize.m``` see the results.  
+Run ```main.m```, the path of the data need to be modified. After running ```main.m```, run ```visualize.m``` see the results.  
 Download the corresponding datasets here:  
 [Dataset1]()(Laundry Room),  
 [Dataset2]()(Vending Machine),  
