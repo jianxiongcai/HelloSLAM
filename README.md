@@ -28,7 +28,7 @@ For Manhattan Frame extraction:
 
 ## Usage
 ### Input data
-Put the input data (IMU data and video) in folder 'data'.
+Put the input data (IMU data and video) in folder 'data'. Only one video is allowed in the 'data' folder.
 
 ### Detail usage:
 Other usage please refer to detailed README in each sub-folder (sub-program) following this order. (You may skip some steps if you downloaded pre-processed data)  
@@ -108,3 +108,6 @@ Refer to detailed README.md in the folder.
 - ZENG XIANGCHEN, zengxch@shanghaitech.edu.cn
 
 - GAO LING, gaoling@shanghaitech.edu.cn
+
+## github
+You can also find the code on github.com: [https://github.com/ernestcai/HelloSLAM](https://github.com/ernestcai/HelloSLAM)
