@@ -7,7 +7,7 @@ This project aims to create 3D panorama with line tracking approach. The main pi
 - **data** (user input folder)
 - **frame_extractor**: frame extraction from video
 - **essentail_extractor**: extract essential and transformation from frames
-- **imuXvideo**: an APP to capture the IMU data and videos
+- **imuXvideo** (forked and modified from [jasonhu5](https://github.com/jasonhu5)): an APP to capture the IMU data and videos
 - **line_extrator**: line extraction from pgm files
 - **3d\_point_refinement**: Do some refinement on the line extracted before and output the results in a 3D line cloud way.
 - **manhattan_extractor**: extract manhattan frames and manhattan lines from data
